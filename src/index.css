@@ -4,3 +4,6 @@
 body {
     font-family: 'DM Sans Variable', sans-serif;
 }
+.aside{
+    height: calc(100vh - 64px);
+}

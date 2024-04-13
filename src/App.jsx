@@ -1,6 +1,23 @@
+//Pages
+import { Home } from "./pages/Home/Home";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+
 function App() {
+
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home/>
+    }
+  ]) 
+  
   return (
-   <h1 className="text-3xl font-semibold">Hello Word</h1>
+   <RouterProvider router={routes} />
   )
 }
 
