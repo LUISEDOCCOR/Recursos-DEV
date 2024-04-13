@@ -1,54 +1,68 @@
+import { useState } from "react"
 import { CategoriesSvg } from "./CategoriesSvg"
+import { supabase } from "../supabase/client"
+import { useEffect } from "react"
+import { Spin } from "./Spin"
 
-export const SideBar = () => {
+export const SideBar = ({callback}) => {
 
-    const categories = [
-        {
-            label: "Libros",
-            to: "/",
-            key: "books"
-        },
-        {
-            label: "Comunidades",
-            to: "/",
-            key: "communities"
-        },
-        {
-            label: "Cursos",
-            to: "/",
-            key: "courses"
-        },
-        {
-            label: "Rutas",
-            to: "/",
-            key: "routes"
-        },
-        {
-            label: "Proyectos",
-            to: "/",
-            key: "projects"
-        },
-        {
-            label: "Retos",
-            to: "/",
-            key: "challenges"
-        },
-    ]
+    const [selectedCategory, setSelectedCategory] = useState({key: "", label: ""})
+    const [Categories, setCategories] = useState([])
+    const [isLoading, setLoading] = useState()
+
+    const getData = async () => {
+        setLoading(true)
+        const {data: categories, error} = await supabase
+        .from("categories")
+        .select("*")
+        
+        if(error) {
+            console.log(error)
+            return
+        }
+
+        setCategories(categories)
+        setLoading(false)
+        
+    }
+
+    useEffect(() => {
+        getData()
+    },[])
+    
+    const handleClick = (category) => {
+        callback(category)
+        setSelectedCategory(category)
+    }
 
     return (
         <aside className="aside px-12 pt-6 font-semibold border-cGrey border-r-2 w-72">
-            <h2 className="text-2xl">Categorías</h2>
-            <ul className="mt-8 space-y-6 text-cGrey">
-                {
-                    categories.map(({label, to, key}) => (
-                        <li className="flex items-center gap-2 text-xl
-                         hover:text-white transition-colors">
-                            <a href={to}>{label}</a>
-                            <CategoriesSvg label={key} />
-                        </li>
-                    ))
-                }
-            </ul>
+            <h2 onClick={() => {handleClick({key: "", label: ""})}} className="text-2xl mb-8 cursor-pointer">
+                Categorías
+            </h2>
+            {
+                !isLoading ? (
+                    <ul className="space-y-6 ">
+                        {
+                            Categories.map(({label, key}) => (
+                                <li key={key} onClick={() => {handleClick({
+                                    key: key,
+                                    label: label
+                                })}} 
+                                className={`flex items-center gap-2 text-xl
+                                hover:text-white transition-colors cursor-pointer
+                                ${selectedCategory.key == key ? "text-white" : "text-cGrey"}`}>
+                                    {label}
+                                    <CategoriesSvg label={key} />
+                                </li>
+                            ))
+                        }
+                    </ul> ) : (
+                    <div className="flex justify-center items-center">
+                        <Spin/>
+                    </div>
+                            )
+            }
         </aside>
     )
 }

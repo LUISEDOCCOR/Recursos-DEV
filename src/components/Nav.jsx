@@ -33,7 +33,7 @@ export const Nav = () => {
                 <div className="flex gap-6 items-center">
                     {
                         pages.splice(1,2).map(({label, to, icon}) => (
-                            <li className="flex items-center gap-2 font-semibold text-2xl hover:text-cGrey transition-colors">
+                            <li key={label} className="flex items-center gap-2 font-semibold text-2xl hover:text-cGrey transition-colors">
                                 {icon}
                                 <a href={to}>{label}</a>
                             </li>

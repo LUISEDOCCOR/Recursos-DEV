@@ -8,9 +8,9 @@ export const SvgDev = ({size = 24}) => {
         xmlns="http://www.w3.org/2000/svg">
             <path d="M7 8L3 12L7 16M17 8L21 12L18.5 14.5M14 4L12.799 8.805M11.997 12.012L9.99701 20M3 3L21 21" 
             stroke="currentColor" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"/>
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"/>
         </svg>
     )
 }
@@ -37,9 +37,9 @@ export const SvgAdd = ({size = 16}) => {
         xmlns="http://www.w3.org/2000/svg">
             <path d="M8.125 2.875L11.125 5.875M10 12.25H14.5M12.25 10V14.5M1 13H4L11.875 5.125C12.072 4.92802 12.2282 4.69416 12.3348 4.43679C12.4415 4.17942 12.4963 3.90357 12.4963 3.625C12.4963 3.34642 12.4415 3.07057 12.3348 2.8132C12.2282 2.55583 12.072 2.32198 11.875 2.125C11.678 1.92802 11.4442 1.77176 11.1868 1.66515C10.9294 1.55855 10.6536 1.50368 10.375 1.50368C10.0964 1.50368 9.82058 1.55855 9.56321 1.66515C9.30584 1.77176 9.07198 1.92802 8.875 2.125L1 10V13Z" 
             stroke="currentColor" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"/>
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"/>
         </svg>
     )
 }
