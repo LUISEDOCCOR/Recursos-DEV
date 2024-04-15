@@ -8,6 +8,7 @@ export const SideBar = ({ callback }) => {
   const [selectedCategory, setSelectedCategory] = useState({
     key: "",
     label: "",
+    id: ""
   });
   const [Categories, setCategories] = useState([]);
   const [isLoading, setLoading] = useState();
@@ -17,6 +18,7 @@ export const SideBar = ({ callback }) => {
     const { data: categories, error } = await supabase
       .from("categories")
       .select("*");
+
 
     if (error) {
       console.log(error);
@@ -40,7 +42,7 @@ export const SideBar = ({ callback }) => {
     <aside className="aside px-12 pt-6 font-semibold border-cGrey border-r-2 w-72">
       <h2
         onClick={() => {
-          handleClick({ key: "", label: "" });
+          handleClick({ key: "", label: "", id: "" });
         }}
         className="text-2xl mb-8 cursor-pointer"
       >
@@ -48,13 +50,14 @@ export const SideBar = ({ callback }) => {
       </h2>
       {!isLoading ? (
         <ul className="space-y-6 ">
-          {Categories.map(({ label, key }) => (
+          {Categories.map(({ label, key, id }) => (
             <li
               key={key}
               onClick={() => {
                 handleClick({
                   key: key,
                   label: label,
+                  id: id
                 });
               }}
               className={`flex items-center gap-2 text-xl

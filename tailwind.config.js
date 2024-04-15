@@ -9,7 +9,6 @@ export default {
       colors: {
         cBlack: "#151515",
         cGrey: "#969696"
-
       }
     },
   },
