@@ -66,7 +66,17 @@ export const Home = () => {
                                 </section>
                             ) :
                             (
-                                <Grid elements={Resources}/>
+                                <section>
+                                    <Grid elements={Resources}/>
+                                    <article className="mt-12 flex justify-center gap-8">
+                                        <button className="h-12 w-12 rounded-full bg-cGrey">
+                                            a
+                                        </button>
+                                        <button className="h-12 w-12 rounded-full bg-cGrey">
+                                            b
+                                        </button>
+                                    </article>
+                                </section>
                             )
                         }
                     </main>
