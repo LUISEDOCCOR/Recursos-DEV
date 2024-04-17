@@ -35,6 +35,7 @@ export const Home = () => {
             setLoading(false)
             setResources(resources)
         }else{
+            setVisible(false)
              const { data: resources, error } = await supabase
                 .from('resources')
                 .select('*')
