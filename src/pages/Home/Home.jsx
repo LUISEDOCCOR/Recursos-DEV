@@ -13,13 +13,14 @@ export const Home = () => {
         label: "",
         id: ""
       })
+    
     const [Resources, setResources] = useState([])
     const [isLoading, setLoading] = useState();
+    const [isVisible, setVisible] = useState(true)
 
     const getData = async  (id = "") => {
+        setLoading(true)
         if(!id){
-            setLoading(true)
-            
             const { data: resources, error } = await supabase
             .from('resources')
             .select('*')
@@ -35,6 +36,23 @@ export const Home = () => {
             setResources(resources)
         }
       }
+    
+    const handleClickMore = async () => {
+        setLoading(true)
+        const { data: resources, error } = await supabase
+            .from('resources')
+            .select('*')
+            .eq("isPublished", true)
+            
+            if(error){
+                console.log(error);
+                return;
+            }
+
+            setVisible(false)
+            setLoading(false)
+            setResources(resources)
+    }
 
     useEffect(() => {
         getData()
@@ -45,9 +63,9 @@ export const Home = () => {
             <header>
                 <Nav/>
             </header>
-            <main className="flex">
+            <main className="flex pt-16">
                 <SideBar callback={(category) => {setCategory(category)}}/>
-                <section className="mt-6 px-12 w-full">
+                <section className="mt-6 w-full pl-80 pr-6">
                     <header className="space-y-4">
                         <h1 className="text-2xl font-semibold">
                             Encuentra todo lo que busques aquí
@@ -58,7 +76,7 @@ export const Home = () => {
                             }
                         </h4>
                     </header>
-                    <main className="flex flex-col items-center">
+                    <main className="flex flex-col items-center mb-12">
                         {
                             isLoading  ? (
                                 <section className="flex justify-center mt-8">
@@ -68,14 +86,16 @@ export const Home = () => {
                             (
                                 <section>
                                     <Grid elements={Resources}/>
-                                    <article className="mt-12 flex justify-center gap-8">
-                                        <button className="h-12 w-12 rounded-full bg-cGrey">
-                                            a
+                                    <div className="flex justify-center mt-8">
+                                        <button 
+                                        className={` bg-[#444444] py-2 px-4 
+                                        rounded-full hover:scale-105 transition-transform
+                                        text-xl ${!isVisible ? "hidden" : "block"}`}
+                                        onClick={handleClickMore}
+                                        >
+                                            Cargar más
                                         </button>
-                                        <button className="h-12 w-12 rounded-full bg-cGrey">
-                                            b
-                                        </button>
-                                    </article>
+                                    </div>
                                 </section>
                             )
                         }

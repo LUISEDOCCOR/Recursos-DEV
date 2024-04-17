@@ -39,7 +39,7 @@ export const SideBar = ({ callback }) => {
   };
 
   return (
-    <aside className="aside px-12 pt-6 font-semibold border-cGrey border-r-2 w-72">
+    <aside className="aside fixed px-12 pt-6 font-semibold border-cGrey border-r-2 w-72">
       <h2
         onClick={() => {
           handleClick({ key: "", label: "", id: "" });

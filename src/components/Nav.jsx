@@ -24,7 +24,8 @@ export const Nav = () => {
     
     
     return(
-            <nav className="gird place-content-center px-12 border-cGrey border-b-2 h-16">
+            <nav className="gird fixed w-full place-content-center 
+            px-12 border-cGrey border-b-2 h-16 backdrop-blur-xl">
             <ul className="flex justify-between">
                 <h1 className="flex items-center gap-2 font-semibold text-2xl hover:text-cGrey transition-colors    ">
                     {pages[0].icon}
