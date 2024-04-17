@@ -21,12 +21,27 @@ export const Home = () => {
     const getData = async  (id = "") => {
         setLoading(true)
         if(!id){
-            const { data: resources, error } = await supabase
-            .from('resources')
-            .select('*')
-            .eq("isPublished", true)
-            .range(0, 9)
-            
+                const { data: resources, error } = await supabase
+                .from('resources')
+                .select('*')
+                .eq("isPublished", true)
+                .range(0, 9)
+                
+            if(error){
+                console.log(error);
+                return;
+            }
+
+            setLoading(false)
+            setResources(resources)
+        }else{
+             const { data: resources, error } = await supabase
+                .from('resources')
+                .select('*')
+                .eq("isPublished", true)
+                .eq("category", id)
+                .range(0, 9)
+                
             if(error){
                 console.log(error);
                 return;
@@ -55,8 +70,9 @@ export const Home = () => {
     }
 
     useEffect(() => {
-        getData()
-    },[])
+        if(!Category.id){setVisible(true)}
+        getData(Category.id) 
+    },[Category])
 
     return(
         <>  
