@@ -1,5 +1,6 @@
 //Pages
 import { Home } from "./pages/Home/Home";
+import { NotFound } from "./pages/404/404";
 
 import {
   createBrowserRouter,
@@ -13,6 +14,10 @@ function App() {
     {
       path: "/",
       element: <Home/>
+    },
+    {
+      path: "*",
+      element: <NotFound/>
     }
   ]) 
   

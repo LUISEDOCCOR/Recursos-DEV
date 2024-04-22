@@ -104,7 +104,9 @@ export const Home = () => {
                                         Resources.length > 0 ? (
                                             <Grid elements={Resources}/>
                                         ) : (
-                                            <h4>No hay recursos</h4>
+                                            <h4 className="text-xl font-semibold">
+                                                No hay recursos
+                                            </h4>
                                         )
                                     }
                                     {/* <div className="flex justify-center mt-8">
