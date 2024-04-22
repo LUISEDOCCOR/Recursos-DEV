@@ -25,7 +25,6 @@ export const Home = () => {
                 .from('resources')
                 .select('*')
                 .eq("isPublished", true)
-                .range(0, 9)
                 
             if(error){
                 console.log(error);
@@ -41,7 +40,6 @@ export const Home = () => {
                 .select('*')
                 .eq("isPublished", true)
                 .eq("category", id)
-                .range(0, 9)
                 
             if(error){
                 console.log(error);
@@ -53,25 +51,25 @@ export const Home = () => {
         }
       }
     
-    const handleClickMore = async () => {
-        setLoading(true)
-        const { data: resources, error } = await supabase
-            .from('resources')
-            .select('*')
-            .eq("isPublished", true)
+    // const handleClickMore = async () => {
+    //     setLoading(true)
+    //     const { data: resources, error } = await supabase
+    //         .from('resources')
+    //         .select('*')
+    //         .eq("isPublished", true)
             
-            if(error){
-                console.log(error);
-                return;
-            }
+    //         if(error){
+    //             console.log(error);
+    //             return;
+    //         }
 
-            setVisible(false)
-            setLoading(false)
-            setResources(resources)
-    }
+    //         setVisible(false)
+    //         setLoading(false)
+    //         setResources(resources)
+    // }
 
     useEffect(() => {
-        if(!Category.id){setVisible(true)}
+        if(!Category.id)setVisible(true)
         getData(Category.id) 
     },[Category])
 
@@ -102,8 +100,14 @@ export const Home = () => {
                             ) :
                             (
                                 <section>
-                                    <Grid elements={Resources}/>
-                                    <div className="flex justify-center mt-8">
+                                    {
+                                        Resources.length > 0 ? (
+                                            <Grid elements={Resources}/>
+                                        ) : (
+                                            <h4>No hay recursos</h4>
+                                        )
+                                    }
+                                    {/* <div className="flex justify-center mt-8">
                                         <button 
                                         className={` bg-[#444444] py-2 px-4 
                                         rounded-full hover:scale-105 transition-transform
@@ -112,7 +116,7 @@ export const Home = () => {
                                         >
                                             Cargar más
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </section>
                             )
                         }
